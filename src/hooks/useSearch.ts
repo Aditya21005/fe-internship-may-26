@@ -21,12 +21,13 @@ export function useSearch(): UseSearchReturn {
   // Ref to track the latest request, so stale responses are discarded
   const requestIdRef = useRef(0)
 
-  useEffect(() => {
-    // Cleanup on unmount: mark component as unmounted
-    return () => {
-      mountedRef.current = false
-    }
-  }, [])
+useEffect(() => {
+  // Ensure the ref is reset during StrictMode's effect re-run on mount
+  mountedRef.current = true
+  return () => {
+    mountedRef.current = false
+  }
+}, [])
 
   useEffect(() => {
     // If query is empty, show all items immediately (no debounce needed)
