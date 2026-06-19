@@ -34,13 +34,13 @@ export default function App() {
           </div>
         )}
 
-        {/* TODO: Replace this placeholder with conditional rendering.
-            - Show <LoadingState /> when isLoading is true
-            - Show <ItemList items={results} /> when results exist and not loading
-            - Show <EmptyState query={query} /> when results are empty and not loading */}
-        <div className="text-gray-500 text-sm text-center py-16">
-          Implement useSearch to see results here.
-        </div>
+        {isLoading ? (
+          <LoadingState />
+        ) : results.length > 0 ? (
+          <ItemList items={results} />
+        ) : (
+          <EmptyState query={query} />
+        )}
       </div>
     </div>
   )
